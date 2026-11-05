@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1769e8">
+  <meta name="description" content="Organize seus treinos de reabilitação do joelho.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <title>Reabilita — Meu joelho</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">R</div>
+        <div><strong>reabilita</strong><span>SEU PROGRESSO, NO SEU RITMO</span></div>
+      </div>
+      <button class="avatar" id="profileBtn" aria-label="Perfil">IM</button>
+    </header>
+
+    <main>
+      <section class="page active" id="homePage">
+        <div class="welcome">
+          <p class="eyebrow">PAINEL DE REABILITAÇÃO</p>
+          <h1>Olá! Vamos cuidar<br>do seu <em>joelho.</em></h1>
+          <p class="muted">Consistência e cuidado, um treino de cada vez.</p>
+        </div>
+
+        <div class="week-card">
+          <div class="week-head"><div><span class="eyebrow light">SUA ROTINA</span><h2>Semana de treinos</h2></div><span class="week-icon">▦</span></div>
+          <div class="week-days" id="weekDays"></div>
+          <div class="week-progress"><div><span id="weekCount">0 de 3 treinos concluídos</span><strong id="weekPercent">0%</strong></div><div class="progress-track"><span id="weekBar"></span></div></div>
+        </div>
+
+        <div class="section-heading"><div><p class="eyebrow">HOJE</p><h2 id="todayTitle">Seu próximo treino</h2></div><span class="date-chip" id="todayDate"></span></div>
+        <div id="todayWorkout"></div>
+
+        <div class="section-heading"><div><p class="eyebrow">ACOMPANHAMENTO</p><h2>Como você está?</h2></div></div>
+        <div class="wellness-card">
+          <div class="wellness-top"><div><strong>Registre como está seu joelho</strong><p class="muted small">Um registro rápido para acompanhar sua evolução.</p></div><span class="pulse">♡</span></div>
+          <label for="painRange">Nível de desconforto hoje <strong id="painValue">0/10</strong></label>
+          <input type="range" min="0" max="10" value="0" id="painRange">
+          <div class="range-labels"><span>Sem desconforto</span><span>Intenso</span></div>
+          <label class="checkline"><input type="checkbox" id="swellingCheck"> Percebi inchaço no joelho</label>
+          <textarea id="dailyNote" rows="2" placeholder="Observações (opcional)"></textarea>
+          <button class="btn btn-outline full" id="saveCheckin">Salvar registro</button>
+        </div>
+
+        <div class="notice"><span>ⓘ</span><p>Respeite as orientações do fisioterapeuta. Este aplicativo organiza sua rotina, mas não substitui avaliação profissional.</p></div>
+      </section>
+
+      <section class="page" id="workoutsPage">
+        <div class="page-intro"><p class="eyebrow">SUA ROTINA</p><h1>Meus treinos</h1><p class="muted">Selecione um treino para ver os exercícios e registrar sua conclusão.</p></div>
+        <div class="workout-tabs" id="workoutTabs"></div>
+        <div id="workoutDetail"></div>
+      </section>
+
+      <section class="page" id="progressPage">
+        <div class="page-intro"><p class="eyebrow">SUA EVOLUÇÃO</p><h1>Meu progresso</h1><p class="muted">Pequenos passos também são progresso.</p></div>
+        <div class="stats-grid">
+          <div class="stat-card"><span class="stat-icon">✓</span><strong id="totalDone">0</strong><span>Treinos concluídos</span></div>
+          <div class="stat-card"><span class="stat-icon">▤</span><strong id="checkinTotal">0</strong><span>Registros feitos</span></div>
+        </div>
+        <div class="panel">
+          <div class="panel-title"><h2>Histórico recente</h2><span class="muted small">Mais recentes primeiro</span></div>
+          <div id="historyList" class="history-list"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-title"><h2>Registros de bem-estar</h2></div>
+          <div id="checkinHistory" class="history-list"></div>
+        </div>
+        <button class="btn btn-danger-outline full" id="clearData">Apagar meus registros</button>
+      </section>
+
+      <section class="page" id="schedulePage">
+        <div class="page-intro"><p class="eyebrow">ORGANIZAÇÃO</p><h1>Agenda semanal</h1><p class="muted">A programação que você compartilhou.</p></div>
+        <div class="panel schedule-panel" id="scheduleList"></div>
+        <div class="panel rules">
+          <h2>Cuidados importantes</h2>
+          <ul>
+            <li>Comece com cargas leves e não treine até a falha.</li>
+            <li>Se algum exercício provocar dor moderada, interrompa.</li>
+            <li>Se o joelho inchar ou piorar até o dia seguinte, reduza a carga e procure seu fisioterapeuta.</li>
+            <li>Não faça ainda tiros, saltos, cortes ou mudanças bruscas de direção.</li>
+            <li>Valide esta rotina com o fisioterapeuta que acompanha seu joelho.</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Navegação principal">
+      <button class="nav-item selected" data-page="homePage"><span>⌂</span>Início</button>
+      <button class="nav-item" data-page="workoutsPage"><span>▣</span>Treinos</button>
+      <button class="nav-item" data-page="progressPage"><span>↗</span>Progresso</button>
+      <button class="nav-item" data-page="schedulePage"><span>▦</span>Agenda</button>
+    </nav>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
